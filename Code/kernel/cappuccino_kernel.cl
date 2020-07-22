@@ -8,6 +8,7 @@
 __kernel void thekernel (
         __global float4*    voxel_point,                                                            ///< Voxel point coordinates.
         __global float4*    voxel_color,                                                            ///< Voxel color coordinates.
+        __global float*     voxel_height,                                                           ///< Voxel height level.
         __global float*     time                                                                    ///< Time [s].
         )
 {
@@ -21,10 +22,12 @@ __kernel void thekernel (
         //////////////////////////////////////////////////////////////////////////////////////////////
         float4 P;                                                                                   // Voxel point coordinates.
         float4 C;                                                                                   // Voxel color coordinates.
+        float H;                                                                                    // Height level.
         float t;                                                                                    // Time [s].
 
         P = voxel_point[gid];                                                                       // Getting voxel point...
         C = voxel_color[gid];                                                                       // Getting voxel color...
+        H = voxel_height[gid];                                                                      // Getting voxel height...
 
         t = time[gid];                                                                              // Getting simulation time...
 
@@ -33,6 +36,7 @@ __kernel void thekernel (
 
         voxel_point[gid] = P;                                                                       // Setting voxel point...
         voxel_color[gid] = C;                                                                       // Setting voxel color...
+        voxel_height[gid] = H;                                                                      // Setting voxel height level...
 
         time[gid] = t;                                                                              // Setting simulation time...
 }

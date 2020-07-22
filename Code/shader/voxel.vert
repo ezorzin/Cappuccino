@@ -24,8 +24,9 @@ const vec3 nF = vec3(+0.0, +0.0, +1.0);                                         
 const float s = 0.008;                                                                              ///< @brief **Voxel side.**
 const vec3 l = vec3(0.0, -1.0, 0.0);                                                                ///< @brief **Light direction.**
 
-layout (location = 0) in vec4 voxel_center;                                                         ///< @brief **Voxel center.**
-layout (location = 1) in vec4 voxel_color;                                                          ///< @brief **Voxel color.**
+layout (location = 0) in vec4   voxel_center;                                                       ///< @brief **Voxel center.**
+layout (location = 1) in vec4   voxel_color;                                                        ///< @brief **Voxel color.**
+layout (location = 2) in float  voxel_height;                                                       ///< @brief **Voxel height.**
 
 out VS_OUT
 {
@@ -95,8 +96,11 @@ void main(void)
   float diffusion_B;                                                                                // BACK:  face "AEGC" diffusion coefficient.
   float diffusion_F;                                                                                // FRONT: face "BFHD" diffusion coefficient.
 
+  vec3 height;
+
   gl_Position = P_mat*V_mat*voxel_center;                                                           // Setting voxel position...
   light = -normalize(l);                                                                            // Normalizing and inverting light direction...
+  height = vec3(0.0, 0.0, voxel_height);                                                            // Computing height offset vector...
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////// VOXEL'S FACE BARICENTRIC NORMALS //////////////////////////////
@@ -122,13 +126,13 @@ void main(void)
   ///////////////////////////////// VOXEL'S NU_VERTEX BARICENTRIC COORDINATES ////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   vs_out.vertex_A = P_mat*V_mat*(voxel_center + vec4(s*A, 1.0));                                    // Computing vertex "A".
-  vs_out.vertex_B = P_mat*V_mat*(voxel_center + vec4(s*B, 1.0));                                    // Computing vertex "B".
+  vs_out.vertex_B = P_mat*V_mat*(voxel_center + vec4(s*(B+ height), 1.0));                          // Computing vertex "B".
   vs_out.vertex_C = P_mat*V_mat*(voxel_center + vec4(s*C, 1.0));                                    // Computing vertex "C".
-  vs_out.vertex_D = P_mat*V_mat*(voxel_center + vec4(s*D, 1.0));                                    // Computing vertex "D".
+  vs_out.vertex_D = P_mat*V_mat*(voxel_center + vec4(s*(D + height), 1.0));                         // Computing vertex "D".
   vs_out.vertex_E = P_mat*V_mat*(voxel_center + vec4(s*E, 1.0));                                    // Computing vertex "E".
-  vs_out.vertex_F = P_mat*V_mat*(voxel_center + vec4(s*F, 1.0));                                    // Computing vertex "F".
+  vs_out.vertex_F = P_mat*V_mat*(voxel_center + vec4(s*(F + height), 1.0));                         // Computing vertex "F".
   vs_out.vertex_G = P_mat*V_mat*(voxel_center + vec4(s*G, 1.0));                                    // Computing vertex "G".
-  vs_out.vertex_H = P_mat*V_mat*(voxel_center + vec4(s*H, 1.0));                                    // Computing vertex "H".
+  vs_out.vertex_H = P_mat*V_mat*(voxel_center + vec4(s*(H + height), 1.0));                         // Computing vertex "H".
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////// VOXEL'S FACE COLORS //////////////////////////////////////
