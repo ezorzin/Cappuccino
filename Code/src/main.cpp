@@ -24,8 +24,8 @@
 #endif
 
 #ifdef WIN32
-  #define SHADER_HOME "..\\Code\\shader"                                                            // Windows OpenGL shaders directory.
-  #define KERNEL_HOME "..\\Code\\kernel"                                                            // Windows OpenCL kernels directory.
+  #define SHADER_HOME "..\\..\\Code\\shader"                                                        // Windows OpenGL shaders directory.
+  #define KERNEL_HOME "..\\..\\Code\\kernel"                                                        // Windows OpenCL kernels directory.
 #endif
 
 #define SHADER_VERT   "voxel.vert"                                                                  // OpenGL vertex shader.
@@ -164,7 +164,7 @@ int main ()
           );
 
   kernel_home = KERNEL_HOME;                                                                        // Setting kernel home directory...
-  kernel_file.push_back ("sine_kernel.cl");                                                         // Setting 1st source file...
+  kernel_file.push_back ("cappuccino_kernel.cl");                                                   // Setting 1st source file...
 
   // Initializing OpenCL kernel...
   K->init (
