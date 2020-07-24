@@ -75,8 +75,8 @@ void main(void)
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////// TILE'S FACE DIFFUSION COEFFICIENTS ////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////////////////
-  diffusion_front = clamp(dot(light, normal), 0.2, 1.0);                                            // Computing face "ABDC" front diffusion coefficient.
-  diffusion_back = clamp(dot(light, -normal), 0.2, 1.0);                                            // Computing face "ABDC" back diffusion coefficient.
+  diffusion_front = clamp(dot(light, normal), 0.3, 1.0);                                            // Computing face "ABDC" front diffusion coefficient.
+  diffusion_back = clamp(dot(light, -normal), 0.3, 1.0);                                            // Computing face "ABDC" back diffusion coefficient.
   
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////// TILE'S NU_VERTEX BARICENTRIC COORDINATES /////////////////////////
