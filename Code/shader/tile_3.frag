@@ -1,7 +1,7 @@
 /// @file   tile.frag
 /// @author Erik ZORZIN
-/// @date   23JUL2020
-/// @brief  This fragment file creates a tile out of a 4D point coordinates.
+/// @date   25JUL2020
+/// @brief  This fragment file creates a tile with 3 bars out of a 4D point coordinates.
 
 #version 410 core
 
